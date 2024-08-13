@@ -1,5 +1,7 @@
 # VeraDemo - Blab-a-Gag
 
+Test of SRCCLR_CUSTOM_MAVEN_EXEC: 'printenv'
+
 ## About
 
 Blab-a-Gag is a fairly simple forum type application which allows:
