@@ -78,5 +78,3 @@ However, I have not been able to get this to work. Instead, I had to create the 
 ```
 set CATALINA_OPTS=%CATALINA_OPTS% -agentpath:C:\iast\agent\agent_win64.dll
 ```
-
-Happy IAST'ing!
