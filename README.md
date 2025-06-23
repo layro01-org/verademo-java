@@ -1,5 +1,7 @@
 # VeraDemo - Blab-a-Gag
 
+TEST
+
 Test of SRCCLR_CUSTOM_MAVEN_EXEC: 'printenv' with Debug packager flag. Added direct printenv.
 
 ## About
