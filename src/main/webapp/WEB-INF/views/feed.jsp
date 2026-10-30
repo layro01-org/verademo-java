@@ -109,7 +109,8 @@
             <div class="actionBox">
             <form class="form-inline" role="form"  method="POST" action="feed">
               <div class="form-group">
-                <input class="form-control" type="text" placeholder="Blab something now..." name="blab" />
+                <input class="form-control" type="text" placeholder="Blab something now..." name="blab" maxlength="280" id="blabInput" />
+                <small class="help-block" id="blabCounter">280 characters remaining</small>
               </div>
               <div class="form-group">
                 <button class="btn btn-default">Add</button>
@@ -149,5 +150,22 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="resources/js/jquery-1.11.2.min.js"></script>
     <script src="resources/js/bootstrap.min.js"></script>
+    <script>
+      (function () {
+        var maxLen = 280;
+        var input = document.getElementById('blabInput');
+        var counter = document.getElementById('blabCounter');
+        if (!input || !counter) return;
+
+        function updateCounter() {
+          var len = input.value.length;
+          var remaining = maxLen - len;
+          counter.textContent = remaining + ' characters remaining';
+        }
+
+        input.addEventListener('input', updateCounter);
+        updateCounter();
+      })();
+    </script>
   </body>
 </html> 
