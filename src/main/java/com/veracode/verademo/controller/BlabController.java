@@ -26,6 +26,7 @@ import com.veracode.annotation.CRLFCleanser;
 @Scope("request")
 public class BlabController {
 	private static final Logger logger = LogManager.getLogger("VeraDemo:BlabController");
+	private static final int BLAB_MAX_LENGTH = 280;
 
 
 	@Autowired
@@ -33,9 +34,16 @@ public class BlabController {
 
 	
 	@RequestMapping(value="/feed", method=RequestMethod.GET)
-	public String showFeed(@RequestParam(value="type", required=false) String type, Model model) {
+	public String showFeed(
+			@RequestParam(value="type", required=false) String type,
+			@RequestParam(value="error", required=false) String error,
+			Model model
+		) {
 		String nextView = "feed";
 		logger.info("Entering showFeed");
+		if (error != null && !error.isEmpty()) {
+			model.addAttribute("error", error);
+		}
 		if (!theUser.getLoggedIn()) {
 			logger.info("User is not Logged In - redirecting...");
 			nextView = "redirect:login?target=feed";
@@ -151,6 +159,17 @@ public class BlabController {
 	public String processFeed(@RequestParam(value="blab", required=true) String blab, Model model) {
 		String nextView = "redirect:feed";
 		logger.info("Entering processBlab");
+		if (blab != null && blab.length() > BLAB_MAX_LENGTH) {
+			logger.info("Rejected blab post: length=" + blab.length());
+			try {
+				return "redirect:feed?error=" + java.net.URLEncoder.encode(
+						"Blab must be " + BLAB_MAX_LENGTH + " characters or fewer.",
+						"UTF-8"
+				);
+			} catch (java.io.UnsupportedEncodingException exceptEncoding) {
+				throw new IllegalStateException("UTF-8 encoding is not supported", exceptEncoding);
+			}
+		}
 		if (!theUser.getLoggedIn()) {
 			logger.info("User is not Logged In - redirecting...");
 			nextView = "redirect:login?target=feed";
