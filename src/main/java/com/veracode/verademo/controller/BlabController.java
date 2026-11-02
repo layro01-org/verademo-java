@@ -418,9 +418,12 @@ public class BlabController {
 			Connection connect = null;
 			PreparedStatement blabbers = null;
 			String blabbersSql = "SELECT users.userid, users.blab_name, users.date_created, "
+							  + "COUNT(DISTINCT blabs.blabid), "
 					                  + "SUM(if(listeners.listener=?, 1, 0)), "
 					                  + "SUM(if(listeners.status='Active',1,0)) "
-					           + "FROM users LEFT JOIN listeners ON users.userid = listeners.blabber "
+					   + "FROM users "
+					   + "LEFT JOIN listeners ON users.userid = listeners.blabber "
+					   + "LEFT JOIN blabs ON users.userid = blabs.blabber "
 					           + "WHERE users.userid NOT IN (1,?)"
 					           + "GROUP BY users.userid;";
 
@@ -443,6 +446,7 @@ public class BlabController {
 				ArrayList<Integer> blabberId = new ArrayList<Integer>();
 				ArrayList<String> blabberName = new ArrayList<String>();
 				ArrayList<String> created = new ArrayList<String>();
+				ArrayList<Integer> blabCount = new ArrayList<Integer>();
 				ArrayList<Integer> listening = new ArrayList<Integer>();
 				ArrayList<Integer> listeners = new ArrayList<Integer>();
 
@@ -450,12 +454,14 @@ public class BlabController {
 					blabberId.add(blabbersResults.getInt(1));
 					blabberName.add(blabbersResults.getString(2));
 					created.add(sdf.format(blabbersResults.getDate(3)));
-					listening.add(blabbersResults.getInt(4));
-					listeners.add(blabbersResults.getInt(5));
+					blabCount.add(blabbersResults.getInt(4));
+					listening.add(blabbersResults.getInt(5));
+					listeners.add(blabbersResults.getInt(6));
 				}
 				model.addAttribute("blabberId", blabberId);
 				model.addAttribute("blabberName", blabberName);
 				model.addAttribute("created", created);
+				model.addAttribute("blabCount", blabCount);
 				model.addAttribute("listening", listening);
 				model.addAttribute("listeners", listeners);
 
