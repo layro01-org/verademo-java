@@ -44,7 +44,19 @@ If you are Windows, do NOT use one of the Tomcat for Windows installers if you w
 
 Install [MySQL 8.0 Community](https://dev.mysql.com/downloads/) for your platform. Make sure you use Native (legacy) password authentication! 
 
-Set up a database in MySQL called `blab` with a user of `blab` and password `z2^E6J4$;u;d`.
+Set up a database in MySQL called `blab` with a user of `blab` (or any username you prefer) and a password of your choosing.
+
+This application reads database connection settings from environment variables (or Java system properties):
+
+```
+export BLAB_DB_HOSTNAME=localhost
+export BLAB_DB_PORT=3306
+export BLAB_DB_NAME=blab
+export BLAB_DB_USERNAME=blab
+export BLAB_DB_PASSWORD='your-password-here'
+```
+
+AWS-style `RDS_*` variables/properties are also supported (`RDS_HOSTNAME`, `RDS_PORT`, `RDS_DB_NAME`, `RDS_USERNAME`, `RDS_PASSWORD`).
  
  
 ## Run
