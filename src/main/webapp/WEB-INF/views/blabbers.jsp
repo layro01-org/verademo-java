@@ -79,6 +79,7 @@
               ArrayList<Integer> blabberId = (ArrayList<Integer>) request.getAttribute("blabberId");
               ArrayList<String> blabberName = (ArrayList<String>) request.getAttribute("blabberName");
               ArrayList<String> created = (ArrayList<String>) request.getAttribute("created");
+              ArrayList<Integer> blabCount = (ArrayList<Integer>) request.getAttribute("blabCount");
               ArrayList<Integer> listening = (ArrayList<Integer>) request.getAttribute("listening");
               ArrayList<Integer> listeners = (ArrayList<Integer>) request.getAttribute("listeners");
             	for (int i=0; i<blabberId.size(); i++) {
@@ -92,7 +93,7 @@
                     </div>
                     <div class="blockquote">
                       <p class=""><%= blabberName.get(i) %><button class="btn btn-default pull-right" name="button"><%= (listening.get(i).intValue()==1 ? "Ignore":"Listen" ) %></button></p> 
-                      <span class="date sub-text">member since <%= created.get(i) %> | <%= listeners.get(i) %> active listeners</span><br>
+                      <span class="date sub-text">member since <%= created.get(i) %> | <%= blabCount.get(i) %> blabs | <%= listeners.get(i) %> active listeners</span><br>
                     </div>
                   </form>
                 </li>
