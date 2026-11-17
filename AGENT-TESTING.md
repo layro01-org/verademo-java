@@ -6,9 +6,17 @@ VeraDemo ("Blab-a-Gag") is a small, deliberately vulnerable Spring MVC 3.2 / JSP
 
 ## 1. Small, well-scoped changes (baseline)
 
-- "Add a character limit of 280 to blab posts. Enforce it on the server in `BlabController` and show a counter in `feed.jsp`."
-- "Add a 'delete my blab' button to the feed. Only the author should be able to delete their own blab."
-- "Show each user's total blab count on the `/blabbers` page."
+A checked box means the prompt has already been run and its change is in the repo. If you want a clean comparison, pick an unchecked one.
+
+- [x] "Add a character limit of 280 to blab posts. Enforce it on the server in `BlabController` and show a counter in `feed.jsp`."
+- [ ] "Add a 'delete my blab' button to the feed. Only the author should be able to delete their own blab."
+- [x] "Show each user's total blab count on the `/blabbers` page."
+  - Done on the `blab-count` branch, not merged to `master` yet.
+- [ ] "Implement the `/blabber?userid=` page so it shows that user's profile and their blabs. It currently returns `notimplemented`."
+- [ ] "Show relative timestamps like '5 minutes ago' on blabs in the feed instead of the raw date."
+- [ ] "Reject empty or whitespace-only blabs and comments on the server, and show an error message in the view."
+- [ ] "Add a search box to `/blabbers` that filters the list by username or blab name."
+- [ ] "Let users edit their own blab within 5 minutes of posting it."
 
 ## 2. Security fixes
 
